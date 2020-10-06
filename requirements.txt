@@ -1,0 +1,3 @@
+# Requirements installed for development
+git+https://github.com/mbhein/include-beer-DHT11#egg=DHT11
+git+https://github.com/mbhein/include-beer-core#egg=core
