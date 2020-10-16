@@ -10,11 +10,12 @@ README = (HERE / "README.md").read_text()
 # use requirements.txt
 with open('requirements.txt') as f:
     required = f.read().splitlines()
+print(required)
 
 # This call to setup() does all the work
 setup(
     name="include-beer-edge-th",
-    version="0.1.0",
+    version="0.1.2",
     description="Monitor temperature and humidity on edge device",
     long_description=README,
     # long_description_content_type="text/markdown",
@@ -31,6 +32,8 @@ setup(
     ],
     packages=["th"],
     include_package_data=True,
-    install_requires=[], #parse_requirements('requirements.txt', session='hack'),
-
+    install_requires=[
+      'include-beer-DHT11',
+      'include-beer-core',
+    ],
 )
