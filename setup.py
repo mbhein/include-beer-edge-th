@@ -30,7 +30,7 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
     ],
-    packages=["include-beer-edge-th"],
+    packages=["includebeeredgeth"],
     include_package_data=True,
     install_requires=[
       'include-beer-DHT11',
