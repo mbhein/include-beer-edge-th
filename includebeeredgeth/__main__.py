@@ -1,6 +1,7 @@
 # main script for Temperature Humidity package
 __version__ = "0.2.1"
 
+from datetime import datetime
 import os
 import importlib
 import core.config.manager as cfg_mgr
@@ -17,6 +18,8 @@ stats_file = __package__ + '.csv'
 stats_dir = os.path.expanduser(config.stats_dir)
 if not os.path.exists(stats_dir):
     os.makedirs(stats_dir)
+stats_date = datetime.now()
+stats_buffer['timestamp'] = stats_date.isoformat()
 
 # Set logging objects
 log_buffer = []
@@ -39,8 +42,8 @@ except Exception as e:
 # Get ambient temperature and humidity
 ambient_temp, ambient_humidity = a_sensor.read(config.ambient_sensor.pin)
 if isinstance(ambient_temp, (float, int)) and isinstance(ambient_humidity, (float, int)):
-    stats_buffer['ambient_humidity'] = ambient_humidity
-    stats_buffer['ambient_temperature'] = ambient_temp
+    stats_buffer['humidity'] = ambient_humidity
+    stats_buffer['temperature'] = ambient_temp
     csv.dict_writer(stats_file, stats_field_names, stats_buffer)
     log_buffer.append('A/T: ' + str(ambient_temp))
     log_buffer.append('A/H: ' + str(ambient_humidity))
