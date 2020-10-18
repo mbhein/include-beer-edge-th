@@ -14,10 +14,10 @@ config = cfg_mgr.ConfigManager()
 # Set stats objects
 stats_buffer = {}
 stats_field_names = ['timestamp', 'temperature', 'humidity']
-stats_file = __package__ + '.csv'
 stats_dir = os.path.expanduser(config.stats_dir)
 if not os.path.exists(stats_dir):
     os.makedirs(stats_dir)
+stats_file = stats_dir + '/' + __package__ + '.csv'
 stats_date = datetime.now()
 stats_buffer['timestamp'] = stats_date.isoformat()
 
