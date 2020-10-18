@@ -22,7 +22,7 @@ if not os.path.exists(stats_dir):
 log_buffer = []
 log_dir = os.path.expanduser(config.log_dir)
 if not os.path.exists(log_dir):
-    os.makekdirs(log_dir)
+    os.makedirs(log_dir)
 log_file = os.path.join(log_dir, __package__ + '.log')
 log_this = logger.load_logger(
     __package__, log_file, config.debugging)

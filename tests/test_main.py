@@ -1,5 +1,8 @@
 import pytest
-import includebeeredgeth as th
+import includebeeredgeth
+
+
 
 def test_main(capsys):
-    assert(th)
+    includebeeredgeth
+    print(dir(includebeeredgeth))
