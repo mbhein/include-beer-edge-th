@@ -16,13 +16,13 @@ stats_field_names = ['timestamp', 'temperature', 'humidity']
 stats_file = __package__ + '.csv'
 stats_dir = os.path.expanduser(config.stats_dir)
 if not os.path.exists(stats_dir):
-    os.mkdir(stats_dir)
+    os.makedirs(stats_dir)
 
 # Set logging objects
 log_buffer = []
 log_dir = os.path.expanduser(config.log_dir)
 if not os.path.exists(log_dir):
-    os.mkdir(log_dir)
+    os.makekdirs(log_dir)
 log_file = os.path.join(log_dir, __package__ + '.log')
 log_this = logger.load_logger(
     __package__, log_file, config.debugging)
