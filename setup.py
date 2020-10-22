@@ -15,7 +15,7 @@ print(required)
 # This call to setup() does all the work
 setup(
     name="include-beer-edge-th",
-    version="0.2.3",
+    version="0.3.0",
     description="Monitor temperature and humidity on edge device",
     long_description=README,
     # long_description_content_type="text/markdown",
