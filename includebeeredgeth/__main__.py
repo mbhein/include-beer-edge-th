@@ -7,6 +7,7 @@ import importlib
 import core.config.manager as cfg_mgr
 import core.utils.logging as logger
 import core.utils.csv as csv
+import core.utils.ftp as ftp
 
 # Set config object
 config = cfg_mgr.ConfigManager()
@@ -30,6 +31,15 @@ log_file = os.path.join(log_dir, __package__ + '.log')
 log_this = logger.load_logger(
     __package__, log_file, config.debugging)
 
+# build ftp connection
+ftps = ftp.connect_tls(config.azure_app.ftp_host,
+        config.azure_app.ftp_user, config.azure_app.ftp_passwd)
+try:
+    ftps.cwd(config.azure_app.ftp_data_dir)
+    print(config.azure_app)
+except Exception:
+    ftps.mkd(config.azure_app.ftp_data_dir)
+
 # Load ambient sensor module
 ambient_sensor = config.ambient_sensor.type
 log_this.debug('Set ambient sensor to: ' + ambient_sensor)
@@ -51,3 +61,10 @@ if isinstance(ambient_temp, (float, int)) and isinstance(ambient_humidity, (floa
 else:
     log_this.error('Error reading ' + config.ambient_sensor.type + 
         ' : ' + str(ambient_temp) + ' ' + str(ambient_humidity))
+
+# send stats file to ftp site if it exists
+if os.path.exists(stats_file):
+    ftps.storbinary("STOR " + stats_file.split('/')
+                    [-1], open(stats_file, 'rb'))
+
+ftps.close()
